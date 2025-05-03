@@ -17,6 +17,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        baloo: ["var(--font-baloo)"],
+        antique: ["var(--font-antique-olive)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

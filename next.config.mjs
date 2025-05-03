@@ -1,6 +1,6 @@
-let userConfig = undefined
+let userConfig = undefined;
 try {
-  userConfig = await import('./v0-user-next.config')
+  userConfig = await import('./v0-user-next.config');
 } catch (e) {
   // ignore error
 }
@@ -21,13 +21,29 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
-}
+  webpack: (config) => {
+    // This avoids scanning protected folders
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: ['**/Application Data/**'],
+    };
 
-mergeConfig(nextConfig, userConfig)
+    // Optional: Filter problematic directories
+    config.module.rules.push({
+      test: /\.(js|ts|tsx)$/,
+      exclude: /Application Data/,
+      use: [],
+    });
+
+    return config;
+  },
+};
+
+mergeConfig(nextConfig, userConfig);
 
 function mergeConfig(nextConfig, userConfig) {
   if (!userConfig) {
-    return
+    return;
   }
 
   for (const key in userConfig) {
@@ -38,11 +54,11 @@ function mergeConfig(nextConfig, userConfig) {
       nextConfig[key] = {
         ...nextConfig[key],
         ...userConfig[key],
-      }
+      };
     } else {
-      nextConfig[key] = userConfig[key]
+      nextConfig[key] = userConfig[key];
     }
   }
 }
 
-export default nextConfig
+export default nextConfig;
