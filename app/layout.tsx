@@ -44,12 +44,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${baloo.variable} ${antiqueOlive.variable}`}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
            <AuthProvider>
               {children}
               <Toaster/>
             </AuthProvider>
-        </ThemeProvider>
       </body>
     </html>
   )
