@@ -3,10 +3,8 @@ import "@/styles/globals.css"
 import { Baloo_2 } from "next/font/google"
 import localFont from 'next/font/local'
 import type { Metadata } from "next"
-import { ThemeProvider } from "@/components/theme-provider"
 import './globals.css'
-import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from "@/components/AuthProvider"
+
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -44,10 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${baloo.variable} ${antiqueOlive.variable}`}>
-           <AuthProvider>
-              {children}
-              <Toaster/>
-            </AuthProvider>
+          {children}
       </body>
     </html>
   )
