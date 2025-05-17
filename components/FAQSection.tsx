@@ -3,36 +3,55 @@
 
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
 
 // Mock data for FAQs
 const faqs = [
   {
-    question: "What ages are these worksheets suitable for?",
-    answer: "Our worksheets are designed for children ages 3-10. The bundle includes activities for different skill and difficulty levels, so you can find appropriate content whether your child is a preschooler or in elementary school."
+    question: "How am I going to receive the Kinovo?",
+    answer: "Quickly and easily, after purchase approval, access to the content will be automatically sent to your email. You can then print it at your convenience and do it with your child."
   },
   {
-    question: "How do I access the worksheets after purchase?",
-    answer: "After completing your purchase, you'll receive an email with a download link. You can download the entire bundle as a ZIP file. The worksheets are provided in PDF format which you can print directly from your computer."
+    question: "Will the material be delivered to my house? Is the product physical?",
+    answer: "No, nothing will be sent to your residence. Kinovo is ENTIRELY DIGITAL (in PDF) and will be sent to your email."
   },
   {
-    question: "Can I print the worksheets multiple times?",
-    answer: "Yes! Once you purchase the bundle, you can print the worksheets as many times as you need for personal use. This is perfect for families with multiple children or teachers working with different students."
+    question: "How long does it take to receive the material?",
+    answer: "After completing your purchase, you will receive access to the product for download in your registered email."
   },
   {
-    question: "Are these worksheets aligned with educational standards?",
-    answer: "Yes, our worksheets are created by experienced educators and align with common educational standards. They focus on developing key skills across multiple subject areas while keeping learning fun and engaging."
+    question: "Is the payment one-time?",
+    answer: "Yes, you pay once and have unlimited access to the purchased material, being able to access and download it as many times as you want."
   },
   {
-    question: "Do I need special materials to use these worksheets?",
-    answer: "Most of our worksheets only require basic supplies like pencils, crayons, or markers. Some activities might suggest using scissors, glue, or other common household items, but we've designed the bundle to be accessible with minimal supplies."
+    question: "Which age group is Kinovo's material suitable for?",
+    answer: "For children aged 1 to 10 years."
   },
   {
-    question: "What if the worksheets aren't right for my child?",
-    answer: "We offer a 30-day satisfaction guarantee. If you find that our worksheets aren't suitable for your child's needs, contact our customer support team within 30 days of purchase for a full refund."
+    question: "Can children over 10 years old do the Kinovo?",
+    answer: "Without a doubt, we even recommend it, as this way you'll be able to gauge the child's level of learning. We've had many cases of children older than 10 years old who have completed Kinovo activities, and the feedback has been very positive."
+  },
+  {
+    question: "What are the bonuses?",
+    answer: "Besides all the aforementioned materials, you will also receive, free of charge, 3 Exclusive Kinovo Bonuses (the Cut and Glue, Drawings to Color, and Games and Playtime). But not only that, upon completing the activities, your little one will also receive a Personalized Children's Diploma with their name."
+  },
+  {
+    question: "What is the price in my local currency?",
+    answer: "To see the price in your country's currency, simply click on the button and you will be redirected to the page where the value of Kinovo in your local currency is automatically displayed."
+  },
+  {
+    question: "What form of payment do you accept?",
+    answer: "We accept almost all payment methods. To view them, click on the button and you will be redirected to the page where all the available payment methods in your country are listed."
+  },
+  {
+    question: "Is the payment method reliable?",
+    answer: "Your data is 100% protected because we use Razorpay's payment gateway, one of the largest and most recognized infoproduct platforms worldwide."
   }
 ];
 
 const FAQSection = () => {
+  const router = useRouter();
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -91,6 +110,17 @@ const FAQSection = () => {
             <ChevronDown size={16} className="ml-1" />
           </button>
         </div>
+        <div className="flex justify-center items-center">
+          <div className="justify-center">
+            <Button
+                className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-8 mt-5 mb-5 px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200 mt-10"
+                onClick={() => router.push('#pricing')}
+            >
+                I Want Kinovo
+            </Button>
+        </div>
+        </div>
+        
       </div>
     </section>
   );

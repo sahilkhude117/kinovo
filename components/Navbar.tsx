@@ -7,6 +7,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Logo from "./Logo";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -45,17 +46,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 h-full">
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image 
-                src="/logos/logo.png" 
-                alt="Beast Philanthropy Logo"
-                width={225}
-                height={75}
-                className="h-16 md:h-20 w-auto"
-              />
-            </Link>
-          </div>
+          <Logo/>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-12">
