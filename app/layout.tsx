@@ -4,6 +4,7 @@ import { Baloo_2 } from "next/font/google"
 import localFont from 'next/font/local'
 import type { Metadata } from "next"
 import './globals.css'
+import KommunicateChat from "@/components/KommunicateChat"
 
 
 const baloo = Baloo_2({
@@ -43,6 +44,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${baloo.variable} ${antiqueOlive.variable}`}>
           {children}
+          <KommunicateChat/>
       </body>
     </html>
   )
