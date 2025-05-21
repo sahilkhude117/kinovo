@@ -13,21 +13,38 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
+      const currentScrollY = window.scrollY;
+      
+      // Determine if we've scrolled enough to change appearance
+      if (currentScrollY > 10) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      
+      // Determine if navbar should be visible based on scroll direction
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down - hide navbar
+        setVisible(false);
+      } else {
+        // Scrolling up - show navbar
+        setVisible(true);
+      }
+      
+      // Update last scroll position
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [lastScrollY]);
 
   const navLinks = [
     { name: "HOME", href: "/" },
@@ -41,7 +58,7 @@ export default function Navbar() {
     <header 
       className={`sticky top-0 z-50 w-full backdrop-blur-lg h-[100px] md:h-[125px] transition-all duration-300 ${
         scrolled ? "bg-background/80 shadow-md py-2 md:py-6" : "bg-white py-2 md:py-6"
-      }`}
+      } ${visible ? "translate-y-0": "-translate-y-full"}`}
     >
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 h-full">
         <div className="flex justify-between items-center h-full">
