@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 type AgeGroup = '1-2'| '3-4' | '5-6' | '7+';
 type Gender = 'Boy' | 'Girl';
+type ChildLevel = 'Toddler' | 'Pre-K' | 'Early Learner' | 'Primary School';
 type Stage = 'age' | 'profile' | 'knowledge' | 'preferences' | 'analyzing' | 'results';
 type QuestionType = {
     question: string;
@@ -28,7 +29,7 @@ export default function QuizPage() {
         games: 0,
         plan: 0,
     });
-    const [childLevel, setChildLevel] = useState<string>('Pre-K');
+    const [childLevel, setChildLevel] = useState<ChildLevel | null>(null);
     const [overlayVisible, setOverlayVisible] = useState(false);
 
     const router = useRouter();
@@ -111,6 +112,71 @@ export default function QuizPage() {
         return completed;
     };
 
+    // Calculate child level based on age and answers
+    const calculateChildLevel = () => {
+        const knowledgeAnswers = Object.entries(answers)
+            .filter(([key]) => key.startsWith('knowledge'))
+            .map(([_, value]) => value);
+            
+        let correctAnswers = 0;
+        knowledgeAnswers.forEach(answer => {
+            if (answer === true) correctAnswers++;
+        });
+        
+        const correctPercentage = knowledgeAnswers.length > 0 
+            ? (correctAnswers / knowledgeAnswers.length) * 100 
+            : 0;
+
+        // Determine level based on age group and correct answers
+        let level: ChildLevel;
+        
+        switch (ageGroup) {
+            case '1-2':
+                level = 'Toddler';
+                break;
+            case '3-4':
+                // If 60% or more answers are "No", level goes down one level
+                level = correctPercentage < 40 ? 'Toddler' : 'Pre-K';
+                break;
+            case '5-6':
+                // If 60% or more answers are "No", level goes down one level
+                level = correctPercentage < 40 ? 'Pre-K' : 'Early Learner';
+                break;
+            case '7+':
+                // If 60% or more answers are "No", level goes down one level
+                level = correctPercentage < 40 ? 'Early Learner' : 'Primary School';
+                break;
+            default:
+                level = 'Pre-K';
+        }
+        
+        return level;
+    };
+
+    // Handle going back to previous stage/question
+    const handleBack = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        } else {
+            switch (stage) {
+                case 'profile':
+                    setStage('age');
+                    break;
+                case 'knowledge':
+                    setStage('profile');
+                    setCurrentQuestionIndex(profileQuestions.length - 1);
+                    break;
+                case 'preferences':
+                    setStage('knowledge');
+                    setCurrentQuestionIndex(getKnowledgeQuestions().length - 1);
+                    break;
+                default:
+                    router.push('/');
+                    break;
+            }
+        }
+    };
+
     // Update total progress whenever stage or currentQuestionIndex changes
     useEffect(() => {
         if (stage !== 'age' && stage !== 'analyzing' && stage !== 'results') {
@@ -132,6 +198,10 @@ export default function QuizPage() {
 
     useEffect(() => {
         if (stage === 'analyzing') {
+          // Calculate child level before showing the results
+          const level = calculateChildLevel();
+          setChildLevel(level);
+          
           // Starting values
           setAnalyzingProgress({
             analyzing: 0,
@@ -252,6 +322,29 @@ export default function QuizPage() {
         }
     };
 
+    // Top Nav bar with back button
+    const renderTopBar = () => {
+        // Don't show back button on age selection, analyzing, or results screens
+        // if (stage === 'age' || stage === 'analyzing' || stage === 'results') {
+        //     return null;
+        // }
+        
+        return (
+            <div className="flex items-center p-4 border-b">
+                <button 
+                    onClick={handleBack}
+                    className="p-2 rounded-full hover:bg-gray-100"
+                >
+                    <ArrowLeft className="h-6 w-6 text-gray-700" />
+                </button>
+                <div className="flex-1 text-center font-medium">
+                    {getStageTitle()}
+                </div>
+                <div className="w-8"></div> {/* Empty div for balanced layout */}
+            </div>
+        );
+    };
+
     const renderStage = () => {
         switch (stage) {
             case 'age':
@@ -343,10 +436,10 @@ export default function QuizPage() {
                         <div className="flex flex-col items-center space-y-4">
                             <div className="w-full mb-4">
                                 <div className="flex justify-between mb-1">
-                                    <div className="text-sm">{getStageTitle()}</div>
+                                    {/* <div className="text-sm">{getStageTitle()}</div> */}
                                     <div className="text-sm font-medium">{Math.round(totalProgress)}%</div>
                                 </div>
-                                <Progress value={totalProgress} color='#13C0FA' className="h-2"/>
+                                <Progress value={totalProgress} className="h-2"/>
                             </div>
 
                             <h1 className="text-xl font-bold text-[#13C0FA] text-center">{currentQuestion?.question}</h1>
@@ -429,9 +522,9 @@ export default function QuizPage() {
                                     <span className="ml-auto text-sm text-gray-500">by Analuxubu Katz</span>
                                 </div>
                                 <p className="text-sm">
-                                    There are <strong>so many brilliant</strong> games inside the IntellectoKids app. 
+                                    There are <strong>so many brilliant</strong> games inside the KINOVO app. 
                                     From <strong>musical</strong> instruments to <strong>dinosaurs</strong>...whatever your 
-                                    younger kids might need...Its <strong>all here</strong> in spades.
+                                    younger kids might need...It's <strong>all here</strong> in spades.
                                 </p>
                             </Card>
                         </div>
@@ -472,7 +565,7 @@ export default function QuizPage() {
                             <CheckCircle className="h-5 w-5 text-green-500" />
                             </div>
                             <div className="flex items-center p-3 bg-blue-50 rounded">
-                            <span className="flex-1">Your Pattern</span>
+                            <span className="flex-1">Your Parenting Style</span>
                             <CheckCircle className="h-5 w-5 text-green-500" />
                             </div>
                         </div>
@@ -496,36 +589,6 @@ export default function QuizPage() {
         }
     };
 
-    // const renderProgressIndicator = () => {
-    //     return (
-    //         <div className="flex items-center mb-6">
-    //             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${stage !== 'age' ? 'bg-blue-600' : 'bg-gray-200'} text-white text-xs`}>
-    //                 <CheckCircle className="h-4 w-4" />
-    //             </div>
-    //             <div className={`h-1 flex-1 ${stage !== 'age' ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
-                
-    //             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${(stage === 'knowledge' || stage === 'preferences' || stage === 'analyzing' || stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'} text-white text-xs`}>
-    //                 <CheckCircle className="h-4 w-4" />
-    //             </div>
-    //             <div className={`h-1 flex-1 ${(stage === 'knowledge' || stage === 'preferences' || stage === 'analyzing' || stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
-                
-    //             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${(stage === 'preferences' || stage === 'analyzing' || stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'} text-white text-xs`}>
-    //                 <CheckCircle className="h-4 w-4" />
-    //             </div>
-    //             <div className={`h-1 flex-1 ${(stage === 'preferences' || stage === 'analyzing' || stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
-                
-    //             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${(stage === 'analyzing' || stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'} text-white text-xs`}>
-    //                 {(stage === 'analyzing' || stage === 'results') ? <CheckCircle className="h-4 w-4" /> : '4'}
-    //             </div>
-    //             <div className={`h-1 flex-1 ${(stage === 'results') ? 'bg-blue-600' : 'bg-gray-200'}`}></div>
-                
-    //             <div className={`flex items-center justify-center w-6 h-6 rounded-full ${stage === 'results' ? 'bg-blue-600' : 'bg-gray-200'} text-white text-xs`}>
-    //                 {stage === 'results' ? <CheckCircle className="h-4 w-4" /> : '5'}
-    //             </div>
-    //         </div>
-    //     );
-    // };
-
     const AgeCard = ({ age, onClick }: { age: string; onClick: () => void }) => {
         const getEmoji = () => {
             switch (age) {
@@ -548,11 +611,7 @@ export default function QuizPage() {
                 className="flex flex-col overflow-hidden rounded-lg border border-blue-200 cursor-pointer hover:shadow-md transition-all"
             >
                 <div className="bg-blue-50 p-4 aspect-square flex items-center justify-center">
-                    <img 
-                        src={`/api/placeholder/140/140`}
-                        alt={`Child age ${age}`}
-                        className="w-full h-full object-cover"
-                    />
+                    <div className="text-6xl">{getEmoji()}</div>
                 </div>
                 <div className="bg-[#13C0FA] font-baloo text-xl text-white py-2 px-4 text-center">
                     Age: {age} {age === "7+" ? "→" : "→"}
@@ -566,23 +625,19 @@ export default function QuizPage() {
 
         if (stage === 'profile' && currentQuestionIndex === 0) {
             return (
-                <div className="flex-1 max-w-md mx-auto w-full fixed inset-0 z-50 bg-[#ffffff] flex flex-col items-center justify-center p-6">
+                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
                     <h1 className="text-2xl font-bold text-[#13C0FA] mb-4">We are glad you are here!</h1>
                     <p className="text-center mb-6">
                         Let's create a personalized learning plan that helps your child learn through play, 
                         combining fun games, worksheets, and interactive cartoons.
                     </p>
 
-                    <div className="mb-8">
-                        <img 
-                            src="/api/placeholder/200/200" 
-                            alt="Cat mascot" 
-                            className="mx-auto"
-                        />
+                    <div className="mb-8 text-center">
+                        <div className="text-8xl mx-auto">😺</div>
                     </div>
 
                     <Button
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4"
+                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
                         onClick={hideOverlay}
                     >
                         CONTINUE
@@ -591,23 +646,19 @@ export default function QuizPage() {
             );
         } else if (stage === 'preferences' && currentQuestionIndex === 0) {
             return (
-                <div className="flex-1 max-w-md mx-auto w-full fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
+                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
                     <h1 className="text-2xl font-bold text-[#13C0FA] mb-4">Good job!</h1>
                     <p className="text-center mb-6">
                         We'll use your answers to create a suitable learning plan for your child, 
                         covering essential preschool topics
                     </p>
 
-                    <div className="mb-8">
-                        <img 
-                            src="/api/placeholder/200/200" 
-                            alt="Child in rocket" 
-                            className="mx-auto"
-                        />
+                    <div className="mb-8 text-center">
+                        <div className="text-8xl mx-auto">🚀</div>
                     </div>
                     
                     <Button 
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4"
+                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
                         onClick={hideOverlay}
                     >
                         CONTINUE
@@ -616,13 +667,9 @@ export default function QuizPage() {
             );
         } else if (stage === 'analyzing') {
             return (
-                <div className="flex-1 max-w-md mx-auto w-full fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
-                    <div className="mb-4">
-                        <img 
-                            src="/api/placeholder/200/200" 
-                            alt="Cat writing" 
-                            className="mx-auto"
-                        />
+                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
+                    <div className="mb-4 text-center">
+                        <div className="text-8xl mx-auto">📝</div>
                     </div>
                     
                     <h1 className="text-2xl font-bold text-[#13C0FA] mb-2">Almost there!</h1>
@@ -632,7 +679,7 @@ export default function QuizPage() {
                     </p>
           
                     <Button 
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4"
+                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
                         onClick={hideOverlay}
                     >
                         CONTINUE
@@ -646,9 +693,9 @@ export default function QuizPage() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
+            {renderTopBar()}
             <main className="flex-1 max-w-md mx-auto w-full p-4">
-                <div className="p-6 relative">
-                    {stage !== 'age' && stage !== 'analyzing' && stage !== 'results'}
+                <div className="p-4 relative">
                     {renderStage()}
                     {renderOverlay()}
                 </div>
