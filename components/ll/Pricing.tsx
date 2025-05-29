@@ -9,8 +9,10 @@ import {motion} from 'framer-motion'
 import { RainbowButton } from "../magicui/rainbow-button";
 import { CardSpotlight } from "../ui/card-spotlight";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export function BackgroundGradientDemo() {
+  const router = useRouter();
   return (
     <div className="mx-4 md:m-8" id="pricing">
       <BackgroundGradient className="rounded-[22px] max-w-3xl p-2 sm:p-8 bg-white">
@@ -66,6 +68,7 @@ export function BackgroundGradientDemo() {
                         </ul>
                         <div className="justify-center">
                             <Button
+                              onClick={() => router.push('/checkout')}
                               className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-4 px-4 mt-5 mb-5 text-lg md:text-2xl lg:text-3xl md:py-8 md:px-16 font-bold rounded-full transition-colors duration-200 w-full md:w-auto"
                             >
                               {plan.cta}
@@ -108,11 +111,11 @@ export default function PricingSection() {
             </div>
             <div className="flex justify-center items-center mt-10">
                 <img
-                src={'/images/pricing/combo.png'}
-                height={"1000"}
-                width="1000"
-                className="h-auto w-full md:w-4/5 lg:w-3/4 xl:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
-                alt="product combo"
+                  src={'/images/pricing/combo.png'}
+                  height={"1000"}
+                  width="1000"
+                  className="h-auto w-full md:w-4/5 lg:w-3/4 xl:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
+                  alt="product combo"
                 />
             </div>
             <div className="flex flex-row font-baloo text-2xl md:text-4xl font-bold mb-2 mt-5">UNIQUE OPPORTUNITY!</div>
