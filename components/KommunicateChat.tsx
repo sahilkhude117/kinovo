@@ -25,7 +25,12 @@ const KommunicateChat = () => {
 
   return (
     <div>
-      <h1>Hello</h1>
+      <div className="fixed bottom-20 right-6 flex flex-col gap-3 z-50">
+          <div className="bg-white text-black px-4 py-2 rounded-lg shadow-lg text-sm font-medium animate-bounce">
+              Need Help?
+            <div className="absolute -bottom-1 right-4 w-2 h-2 bg-white rotate-45"></div>
+          </div>
+      </div>
     </div>
   );
 };
