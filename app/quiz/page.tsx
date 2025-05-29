@@ -171,7 +171,6 @@ export default function QuizPage() {
                     setCurrentQuestionIndex(getKnowledgeQuestions().length - 1);
                     break;
                 default:
-                    router.push('/');
                     break;
             }
         }
@@ -325,9 +324,9 @@ export default function QuizPage() {
     // Top Nav bar with back button
     const renderTopBar = () => {
         // Don't show back button on age selection, analyzing, or results screens
-        // if (stage === 'age' || stage === 'analyzing' || stage === 'results') {
-        //     return null;
-        // }
+        if (stage === 'age' || stage === 'analyzing' || stage === 'results') {
+            return null;
+        }
         
         return (
             <div className="flex items-center p-4 border-b">
@@ -369,7 +368,7 @@ export default function QuizPage() {
                         <div className="flex flex-col items-center space-y-4">
                             <div className="w-full mb-4">
                                 <div className="flex justify-between mb-1">
-                                    <div className="text-sm">Learning plans</div>
+                                    {/* <div className="text-sm">Learning plans</div> */}
                                     <div className="text-sm font-medium">{Math.round(totalProgress)}%</div>
                                 </div>
                                 <Progress value={totalProgress} className="h-2"/>
@@ -409,7 +408,7 @@ export default function QuizPage() {
                         <div className="flex flex-col items-center space-y-4">
                             <div className="w-full mb-4">
                                 <div className="flex justify-between mb-1">
-                                    <div className="text-base">Learning plans</div>
+                                    {/* <div className="text-base">Learning plans</div> */}
                                     <div className="text-sm font-medium">{Math.round(totalProgress)}%</div>
                                 </div>
                                 <Progress value={totalProgress} className="h-2"/>
@@ -575,7 +574,7 @@ export default function QuizPage() {
                     <div className="w-full mt-20 mb-6">
                         <Button
                             className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white p-6 rounded-full"
-                            onClick={() => router.push('https://rzp.io/rzp/kj0uP2Ui')}
+                            onClick={() => router.push('/checkout')}
                         >
                         Continue To See Your Plan!
                         </Button>
@@ -625,65 +624,77 @@ export default function QuizPage() {
 
         if (stage === 'profile' && currentQuestionIndex === 0) {
             return (
-                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
-                    <h1 className="text-2xl font-bold text-[#13C0FA] mb-4">We are glad you are here!</h1>
-                    <p className="text-center mb-6">
-                        Let's create a personalized learning plan that helps your child learn through play, 
-                        combining fun games, worksheets, and interactive cartoons.
-                    </p>
+                <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+                    <div className="max-w-md w-full md:max-w-xl lg:max-w-2xl mx-auto p-6 md:p-8 bg-white rounded-lg">
+                        <h1 className="text-2xl md:text-3xl font-bold text-[#13C0FA] mb-4 text-center">We are glad you are here!</h1>
+                        <p className="text-center mb-6 md:text-lg">
+                            Let's create a personalized learning plan that helps your child learn through play, 
+                            combining fun games, worksheets, and interactive cartoons.
+                        </p>
 
-                    <div className="mb-8 text-center">
-                        <div className="text-8xl mx-auto">😺</div>
+                        <div className="mb-8 text-center">
+                            <div className="text-8xl mx-auto">😺</div>
+                        </div>
+
+                        <div className="flex justify-center">
+                            <Button
+                                className="w-full max-w-xs md:max-w-md bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
+                                onClick={hideOverlay}
+                            >
+                                CONTINUE
+                            </Button>
+                        </div>
                     </div>
-
-                    <Button
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
-                        onClick={hideOverlay}
-                    >
-                        CONTINUE
-                    </Button>
                 </div>
             );
         } else if (stage === 'preferences' && currentQuestionIndex === 0) {
             return (
-                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
-                    <h1 className="text-2xl font-bold text-[#13C0FA] mb-4">Good job!</h1>
-                    <p className="text-center mb-6">
-                        We'll use your answers to create a suitable learning plan for your child, 
-                        covering essential preschool topics
-                    </p>
+                <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+                    <div className="max-w-md w-full md:max-w-xl lg:max-w-2xl mx-auto p-6 md:p-8 bg-white rounded-lg">
+                        <h1 className="text-2xl md:text-3xl font-bold text-[#13C0FA] mb-4 text-center">Good job!</h1>
+                        <p className="text-center mb-6 md:text-lg">
+                            We'll use your answers to create a suitable learning plan for your child, 
+                            covering essential preschool topics
+                        </p>
 
-                    <div className="mb-8 text-center">
-                        <div className="text-8xl mx-auto">🚀</div>
+                        <div className="mb-8 text-center">
+                            <div className="text-8xl mx-auto">🚀</div>
+                        </div>
+                        
+                        <div className="flex justify-center">
+                            <Button 
+                                className="w-full max-w-xs md:max-w-md bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
+                                onClick={hideOverlay}
+                            >
+                                CONTINUE
+                            </Button>
+                        </div>
                     </div>
-                    
-                    <Button 
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
-                        onClick={hideOverlay}
-                    >
-                        CONTINUE
-                    </Button>
                 </div>
             );
         } else if (stage === 'analyzing') {
             return (
-                <div className="fixed inset-0 z-50 bg-white flex flex-col items-center justify-center p-6">
-                    <div className="mb-4 text-center">
-                        <div className="text-8xl mx-auto">📝</div>
-                    </div>
-                    
-                    <h1 className="text-2xl font-bold text-[#13C0FA] mb-2">Almost there!</h1>
-                    <p className="text-center mb-8">
-                        We need to understand your child's preferences to enhance the learning experience. 
-                        Just a few more steps left!
-                    </p>
+                <div className="fixed inset-0 z-50 bg-white flex items-center justify-center">
+                    <div className="max-w-md w-full md:max-w-xl lg:max-w-2xl mx-auto p-6 md:p-8 bg-white rounded-lg">
+                        <div className="mb-4 text-center">
+                            <div className="text-8xl mx-auto">📝</div>
+                        </div>
+                        
+                        <h1 className="text-2xl md:text-3xl font-bold text-[#13C0FA] mb-2 text-center">Almost there!</h1>
+                        <p className="text-center mb-8 md:text-lg">
+                            We need to understand your child's preferences to enhance the learning experience. 
+                            Just a few more steps left!
+                        </p>
           
-                    <Button 
-                        className="w-full bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
-                        onClick={hideOverlay}
-                    >
-                        CONTINUE
-                    </Button>
+                        <div className="flex justify-center">
+                            <Button 
+                                className="w-full max-w-xs md:max-w-md bg-[#13C0FA] hover:bg-[#FBB406] font-baloo text-xl font-bold text-white py-4 rounded-full"
+                                onClick={hideOverlay}
+                            >
+                                CONTINUE
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             );
         }
