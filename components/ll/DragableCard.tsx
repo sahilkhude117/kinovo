@@ -6,141 +6,206 @@ import {
 import { RainbowButton } from "../magicui/rainbow-button";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import { Button } from "../ui/button";
+import { BenefitsTimeline } from "./Benifits";
 
 export function ContentCard() {
   
-    const items = [
+    const data = [
         {
             title: "Illustrated Alphabet",
-            image: "/images/contents/a.png",
-            className: "absolute top-10 left-[20%] rotate-[-5deg]",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Beautifully illustrated alphabet activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/a.png'
         },
         {
-            title: "Age Wise",
-            image: "/images/contents/age_wise.png",
-            className: "absolute top-40 left-[25%] rotate-[-7deg]",
+            title: "Age Wise Learning",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Perfectly tailored content for every developmental stage</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/age_wise.png'
         },
         {
-            title: "Busy Books",
-            image: "/images/contents/books.png",
-            className: "absolute top-5 left-[40%] rotate-[8deg]",
+            title: "Interactive Busy Books",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Collection of busy books with interactive activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/books.png'
         },
         {
-            title: "Colors and Shapes",
-            image: "/images/contents/color_and_shapes.png",
-            className: "absolute top-32 left-[55%] rotate-[10deg]",
+            title: "Colors and Shapes Discovery",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Fun color recognition and shape identification activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/color_and_shapes.png'
         },
         {
-            title: "Dot-to-Dot",
-            image: "/images/contents/dot-to-dot.png",
-            className: "absolute top-20 right-[35%] rotate-[2deg]",
+            title: "Dot-to-Dot Adventures",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Develop fine motor skills and number recognition</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/dot-to-dot.png'
         },
         {
-            title: "Forming Words",
-            image: "/images/contents/forming_words.png",
-            className: "absolute top-24 left-[45%] rotate-[-7deg]",
+            title: "Word Formation Skills",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Systematic word formation activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/forming_words.png'
         },
         {
-            title: "Games",
-            image: "/images/contents/games.png",
-            className: "absolute top-8 left-[30%] rotate-[4deg]",
+            title: "Educational Games",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Collection of educational games</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/games.png'
         },
-        // {
-        //     title: "Handwriting",
-        //     image: "/images/contents/handwriting.png",
-        //     className: "absolute top-36 right-[20%] rotate-[-3deg]",
-        // },
-        // {
-        //     title: "Math Fun",
-        //     image: "/images/contents/math.png",
-        //     className: "absolute top-16 left-[35%] rotate-[6deg]",
-        // },
-        // {
-        //     title: "Numbers",
-        //     image: "/images/contents/numbers.png",
-        //     className: "absolute top-28 left-[60%] rotate-[-8deg]",
-        // },
-        // {
-        //     title: "Parenting & Nutrition",
-        //     image: "/images/contents/parenting.png",
-        //     className: "absolute top-12 right-[25%] rotate-[9deg]",
-        // },
-        // {
-        //     title: "Premium",
-        //     image: "/images/contents/premium.png",
-        //     className: "absolute top-44 left-[15%] rotate-[3deg]",
-        // },
-        // {
-        //     title: "Pretend Play",
-        //     image: "/images/contents/pretend_play.png",
-        //     className: "absolute top-20 left-[50%] rotate-[-4deg]",
-        // },
-        // {
-        //     title: "Reading",
-        //     image: "/images/contents/reading.png",
-        //     className: "absolute top-32 right-[30%] rotate-[7deg]",
-        // },
-        // {
-        //     title: "Reward Charts",
-        //     image: "/images/contents/reward_charts.png",
-        //     className: "absolute top-4 left-[10%] rotate-[-6deg]",
-        // },
-        // {
-        //     title: "Stop Mobile Addiction",
-        //     image: "/images/contents/stop_mobile.png",
-        //     className: "absolute top-24 right-[15%] rotate-[5deg]",
-        // },
-        // {
-        //     title: "Tracing",
-        //     image: "/images/contents/tracing.png",
-        //     className: "absolute top-40 right-[10%] rotate-[-9deg]",
-        // },
-    ];
-
-    const words = [
-    {
-      text: "Tip:",
-    },
-    {
-      text: "To",
-    },
-    {
-      text: "view",
-    },
-    {
-      text: "more, ",
-    },
-    {
-      text: "Drag Cards",
-      className: "text-blue-500 dark:text-blue-500",
-    },
+        {
+            title: "Handwriting Mastery",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Build confident writers with structured handwriting practice</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/handwriting.png'
+        },
+        {
+            title: "Math Fun Activities",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Fun-filled math activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/math.png'
+        },
+        {
+            title: "Number Recognition",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Establish strong number foundations</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/numbers.png'
+        },
+        {
+            title: "Parenting & Nutrition Guidance",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Support your parenting journey with expert guidance</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/parenting.png'
+        },
+        {
+            title: "Premium Content Access",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Advanced activities and specialized learning materials</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/premium.png'
+        },
+        {
+            title: "Pretend Play Activities",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Spark imagination and creativity</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/pretend_play.png'
+        },
+        {
+            title: "Reading Comprehension",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Comprehensive reading activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/reading.png'
+        },
+        {
+            title: "Motivational Reward Charts",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Encourage positive behavior and achievement</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/reward_charts.png'
+        },
+        {
+            title: "Screen Time Solutions",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Combat mobile addiction with engaging offline activities</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/stop_mobile.png'
+        },
+        {
+            title: "Tracing Practice",
+            content: (
+                <div>
+                    <p className="mb-4 md:mb-8 text-sm font-normal text-neutral-800 md:text-base dark:text-neutral-200">
+                        <strong>Develop fine motor control and pre-writing skills</strong>
+                    </p>
+                </div>
+            ),
+            icon: '/images/contents/tracing.png'
+        },
     ];
 
   return (
-    <div className="flex flex-col items-center justify-center bg-blue-50">
+    <div className="flex flex-col items-center justify-center">
         <div>
-            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo font-bold mt-20 text-xl md:text-2xl ">What You Will Get</RainbowButton>
+            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo font-bold mt-10 text-base md:text-2xl ">What You Will Get</RainbowButton>
         </div>
-        <div>
-          <TypewriterEffectSmooth words={words} className="mb-10 text-md md:text-md lg:text-md xl:text-md" />
-        </div>
-    <DraggableCardContainer className="relative flex min-h-screen w-full items-center justify-center overflow-clip">
-      <p className="absolute top-1/2 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-400 md:text-4xl dark:text-neutral-800">
-        And Many more...
-      </p>
-      {items.map((item) => (
-        <DraggableCardBody className={item.className}>
-          <img
-            src={item.image}
-            alt={item.title}
-            className="pointer-events-none relative z-10 h-50 w-50 md:h-80 md:w-80 object-cover"
-          />
-          <h3 className="mt-4 text-center text-2xl font-bold text-neutral-700 dark:text-neutral-300">
-            {item.title}
-          </h3>
-        </DraggableCardBody>
-      ))}
-    </DraggableCardContainer>
+        <BenefitsTimeline data={data}/>
     </div>
   );
 }

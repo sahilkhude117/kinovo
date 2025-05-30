@@ -2,6 +2,7 @@
 import React from "react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { Star } from "lucide-react";
+
 const people = [
   {
     id: 1,
@@ -54,7 +55,7 @@ export function AvatarCloud() {
       <AnimatedTooltip items={people} />
     </div>
     <div className="flex flex-col md:flex-col items-center ml-10">
-        <div className="flex items-center mb-2 md:mb-2">
+        <div className="flex items-center mb-1 md:mb-2">
           {[...Array(5)].map((_, i) => (
             <Star 
               key={i} 
