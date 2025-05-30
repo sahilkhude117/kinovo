@@ -14,14 +14,14 @@ import { useRouter } from "next/navigation";
 export function BackgroundGradientDemo() {
   const router = useRouter();
   return (
-    <div className="mx-4 md:m-8" id="pricing">
+    <div className="mx-4 md:m-8 mb-10" id="pricing">
       <BackgroundGradient className="rounded-[22px] max-w-3xl p-2 sm:p-8 bg-white">
             <div className="flex">
                 {[
                     {
                         name: "SUPER COMBO",
-                        price: "$7",
-                        originalPrice: '$20',
+                        price: "₹149",
+                        originalPrice: '₹199',
                         description: "That value will be converted to your local currency",
                         features: [
                             "One-time payment + Lifetime Access",
@@ -52,23 +52,23 @@ export function BackgroundGradientDemo() {
                         </div>
                         )}
                         <CardContent className="p-3 sm:p-6 flex flex-col h-full">
-                        <h3 className="text-2xl font-bold">{plan.name}</h3>
-                        <div className="flex items-baseline mt-4">
+                        <h3 className="text-xl md:text-2xl font-bold">{plan.name}</h3>
+                        <div className="flex items-baseline mt-2 md:mt-4">
                             <span className="text-4xl font-bold">{plan.price}</span>
                             <span className="text-muted-foreground ml-1 line-through text-red-500">{plan.originalPrice}</span>
                         </div>
-                        <p className="text-muted-foreground mt-2">{plan.description}</p>
-                        <ul className="space-y-3 my-6 flex-grow">
+                        <p className="text-muted-foreground mt-4">{plan.description}</p>
+                        <ul className="space-y-3 mt-4 flex-grow">
                             {plan.features.map((feature, j) => (
                             <li key={j} className="flex items-center">
                                 <Check className="mr-2 size-4 text-primary" />
-                                <span>{feature}</span>
+                                <span className="text-sm">{feature}</span>
                             </li>
                             ))}
                         </ul>
                         <div className="justify-center">
                             <Button
-                              onClick={() => router.push('/checkout')}
+                              onClick={() => router.push('/checkout/combo')}
                               className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-4 px-4 mt-5 mb-5 text-lg md:text-2xl lg:text-3xl md:py-8 md:px-16 font-bold rounded-full transition-colors duration-200 w-full md:w-auto"
                             >
                               {plan.cta}
@@ -86,61 +86,39 @@ export function BackgroundGradientDemo() {
 
 export default function PricingSection() {
     return (
-        <div className="flex flex-col items-center justify-center w-full overflow-clip bg-blue-50">
-            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo mt-16 text-xl md:text-2xl mb-4">Pricing</RainbowButton>
+        <div className="flex flex-col items-center justify-center w-full overflow-clip bg-blue-50 ">
+            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo mt-6 text-xl md:text-2xl mb-4">Pricing</RainbowButton>
             <div className="grid grid-cols-1 md:grid-cols-2 items-center">
                 <div className="flex justify-center">
                     <img
                         src={'/images/pricing/satisfaction_guaranteed.png'}
                         height={"450"}
                         width="450"
-                        className="h-auto w-full md:w-3/4 lg:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
+                        className="h-auto w-3/4 lg:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
                         alt="satisfaction guaranty"
                     />
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <div className="font-baloo text-2xl md:text-4xl font-bold mb-2 text-center">
+                    <div className="font-baloo text-xl md:text-4xl font-bold mb-2 text-center">
                         SATISFACTION GUARANTEED!
                     </div>
                     <div className="mb-5 px-4 md:px-10 max-w-2xl">
-                        <div className="font-baloo text-base md:text-xl font-semibold text-center">
+                        <div className="font-baloo text-sm md:text-xl font-semibold text-center">
                         Besides all the benefits mentioned above, when you purchase Kinovo, you get a 7-day guarantee.
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center items-center mt-10">
+            <div className="flex justify-center items-center mb-6 md:mt-10">
                 <img
                   src={'/images/pricing/combo.png'}
                   height={"1000"}
                   width="1000"
-                  className="h-auto w-full md:w-4/5 lg:w-3/4 xl:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
+                  className="h-auto w-4/5 md:w-4/5 lg:w-3/4 xl:w-2/3 object-cover rounded-xl group-hover/card:shadow-xl"
                   alt="product combo"
                 />
             </div>
-            <div className="flex flex-row font-baloo text-2xl md:text-4xl font-bold mb-2 mt-5">UNIQUE OPPORTUNITY!</div>
-            <div className="flex justify-center item-center mb-5 ml-10 mr-10 max-w-2xl">
-                <div className="font-baloo text-base md:text-xl font-semibold text-center">This discount is available only for today take advantage and secure yours right now..</div>
-            </div>
             <BackgroundGradientDemo />
-            <div className="grid grid-cols-1 md:grid-cols-2 mt-10 mb-10">
-                <div>
-                    <div className="flex justify-center items-center">
-                        <div className="text-white font-baloo font-bold text-xl md:text-2xl mb-5 text-center">
-                            <div className='px-3 py-2 bg-orange-600 rounded-md'>
-                                65% OFF
-                            </div>
-                        </div>
-                    </div>
-                  <div className="flex justify-center items-center text-center font-baloo text-xl md:text-2xl font-bold mb-5 m-2">ON PURCHASES UNTIL THE END OF THE PROMOTION</div>
-                </div>
-                <div className="flex flex-col justify-center item-center mb-5 ml-10 mr-10 max-w-2xl">
-                    <div className="font-baloo text-xl md:text-2xl font-semibold text-center">This Promotion ends in: ⏰⏳︎↓ </div>
-                    <div className="flex-col mt-5">
-                        <Timer/>
-                    </div>
-                </div>
-            </div>
         </div>
     )
 }

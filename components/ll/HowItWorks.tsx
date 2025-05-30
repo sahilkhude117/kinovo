@@ -11,7 +11,7 @@ export function HowItWorks() {
         title: "It will arrive via Email",
         content: (
             <div>
-            <p className="mb-8 text-md font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+            <p className="mb-8 text-sm font-normal text-neutral-800 md:text-md dark:text-neutral-200">
                 The the content is entirely in PDF format and after the purchase, access to the material will be sent to your email.
             </p>
             <div className="grid grid-cols-2 gap-4">
@@ -37,7 +37,7 @@ export function HowItWorks() {
         title: "You Print",
         content: (
             <div>
-            <p className="mb-8 text-md font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+            <p className="mb-8 text-sm font-normal text-neutral-800 md:text-md dark:text-neutral-200">
                 Unlimited access to the purchased material, being able to acceess, download, and print as many time as desired, in your own time.
             </p>
             <div className="grid grid-cols-2 gap-4">
@@ -63,7 +63,7 @@ export function HowItWorks() {
         title: "Carry out the activities",
         content: (
             <div>
-            <p className="mb-4 text-md font-normal text-neutral-800 md:text-sm dark:text-neutral-200">
+            <p className="mb-4 text-sm font-normal text-neutral-800 md:text-md dark:text-neutral-200">
                 The printed material is ready. Its time to get down to work.
             </p>
             <div className="grid grid-cols-2 gap-4">
@@ -89,7 +89,7 @@ export function HowItWorks() {
 
     return (
         <div className="flex flex-col items-center justify-center w-full overflow-clip">
-            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo mt-20 text-xl md:text-2xl">How It Works</RainbowButton>
+            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo text-md md:text-2xl">How It Works</RainbowButton>
             <Timeline data={data}/>
         </div>
     );

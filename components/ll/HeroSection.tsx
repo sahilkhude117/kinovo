@@ -17,7 +17,6 @@ const HeroSection = () => {
     const words = ["Premium", "Curated", "Engaging", "Creative", "Essential"];
 
     return (
-        <BackgroundBeamsWithCollision>
         <section className="w-full md:py-10 overflow-hidden">
           <div className="container px-4 md:px-6 relative">
             <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-black bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
@@ -29,48 +28,33 @@ const HeroSection = () => {
             >
               <AnimatedShinyTextBadge/>
               <div className="flex flex-col justify-center items-center">
-                    <div className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#13C0FA]">
-                        <FlipWords words={words} className="text-2xl md:text-5xl lg:text-6xl font-bold" />Worksheets
+                    <div className="text-xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#13C0FA]">
+                        <FlipWords words={words} className="text-xl md:text-5xl lg:text-6xl font-bold" /> Worksheets
                     </div>
-                    <div className="text-2xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+                    <div className="text-xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-6">
                         For Smarter Kids, Happier Parents
                     </div>
               </div>
-              <p className="text-sm md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <p className="text-xs md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto">
                 Thousands of premium printable worksheets that make childhood education fun, engaging, and effortlessly organized.
               </p>
-              <div className="flex justify-center items-center mb-12">
+              <div className="flex justify-center items-center mb-6 md:mb-12">
                 <HeroVideo/>
               </div>
-              <div className="flex justify-center items-center mb-12">
+              <div className="flex justify-center items-center mb-6 md:mb-12">
                 <AvatarCloud/>
               </div>
               <div className="justify-center">
                 <Button
-                    className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-8 px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200"
+                    className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-6 md:py-8 px-12 md:px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200"
                     onClick={() => router.push('#pricing')}
                 >
                     I WANT
                 </Button>
               </div>
-              <div className="flex items-center justify-center gap-4 mt-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Check className="size-4 text-primary" />
-                  <span>No credit card</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Check className="size-4 text-primary" />
-                  <span>14-day trial</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Check className="size-4 text-primary" />
-                  <span>Cancel anytime</span>
-                </div>
-              </div>
             </motion.div>
           </div>
-        </section>
-        </BackgroundBeamsWithCollision>
+      </section>
     )
 }
 
