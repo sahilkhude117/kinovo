@@ -63,13 +63,13 @@ const FAQSection = () => {
   };
 
   return (
-    <section id="faq" className="py-16 px-4 bg-white">
+    <section id="faq" className="mt-4 px-4 bg-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="font-baloo text-3xl md:text-4xl text-gray-800 mb-4">
+          <h2 className="font-baloo text-2xl md:text-4xl text-gray-800 mb-2 md:mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="font-antique text-gray-600">
+          <p className="font-antique text-sm md:text-basetext-gray-600">
             Everything you need to know about our worksheet bundle.
           </p>
         </div>
@@ -84,7 +84,7 @@ const FAQSection = () => {
                 className="w-full flex justify-between items-center p-6 text-left"
                 onClick={() => toggleFAQ(index)}
               >
-                <h3 className="font-baloo text-lg text-gray-800">{faq.question}</h3>
+                <h3 className="font-baloo text-base md:text-lg text-gray-800">{faq.question}</h3>
                 {expandedIndex === index ? (
                   <ChevronUp size={20} className="text-gray-500 flex-shrink-0" />
                 ) : (
@@ -94,7 +94,7 @@ const FAQSection = () => {
               
               {expandedIndex === index && (
                 <div className="p-6 pt-0">
-                  <p className="font-antique text-gray-600">{faq.answer}</p>
+                  <p className="font-antique text-sm md:text-base text-gray-600">{faq.answer}</p>
                 </div>
               )}
             </div>
@@ -102,7 +102,7 @@ const FAQSection = () => {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="font-antique text-gray-600 mb-4">
+          <p className="font-antique text-sm md:text-base text-gray-600 mb-4">
             Still have questions? We're here to help!
           </p>
           <button className="font-baloo text-[#13C0FA] hover:text-[#0fabde] flex items-center justify-center mx-auto">
@@ -113,7 +113,7 @@ const FAQSection = () => {
         <div className="flex justify-center items-center">
           <div className="justify-center">
             <Button
-                className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-8 mt-5 mb-5 px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200 mt-10"
+                className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-6 md:py-8 px-12 md:px-16 mt-5 mb-5 px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200 mt-10"
                 onClick={() => router.push('#pricing')}
             >
                 I Want Kinovo
