@@ -8,14 +8,14 @@ import HeroSection from "@/components/ll/HeroSection";
 import { HowItWorks } from "@/components/ll/HowItWorks";
 import {OfferBanner} from "@/components/ll/OfferBanner";
 import PricingSection from "@/components/ll/Pricing";
-import { AnimatedTestimonialsDemo } from "@/components/ll/Testimonials";
+import TestimonialsSection from "@/components/ll/Testimonials";
 import Navbar from "@/components/Navbar";
 
-export default function Home () {
+export default function Home() {
     return (
         <main>
             <OfferBanner
-                title = "Get 50% Off"
+                title = "Get 25% Off"
                 description = ""
                 linkText = "Get Now"
                 linkUrl = "#pricing"
@@ -23,13 +23,13 @@ export default function Home () {
             />
             <Navbar/>
             <HeroSection/>
-            <AnimatedTestimonialsDemo/>
             <HowItWorks/>
             <ContentCard/>
             <BonusCards/>
             <Certificate/>
             <Benifits/>
             <PricingSection/>
+            <TestimonialsSection/>
             <FAQSection/>
             <Footer/>
         </main>
