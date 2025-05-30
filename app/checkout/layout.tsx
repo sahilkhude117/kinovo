@@ -20,7 +20,7 @@ export default function CheckoutLayout({
             <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
               Back to shopping cart
             </span>
-            <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
+            <span className="mt-px block text-sm small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
               Back
             </span>
           </Link>
