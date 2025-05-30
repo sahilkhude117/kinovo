@@ -8,11 +8,10 @@ import { TextGenerateEffect } from "../ui/text-generate-effect";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
-export function ScratchToRevealDemo() {
-
+export function ResponsiveImageDemo() {
   const [dimensions, setDimensions] = useState({
-    width: 300,
-    height: 200
+    width: 450,
+    height: 320
   });
 
   // Update dimensions based on screen size
@@ -21,14 +20,14 @@ export function ScratchToRevealDemo() {
       // For larger screens (md breakpoint is typically 768px)
       if (window.innerWidth >= 768) {
         setDimensions({
-          width: 650, // Slightly reduced from 750
-          height: 430  // Slightly reduced from 500
+          width: 650,
+          height: 430
         });
       } else if (window.innerWidth >= 400) {
         // Medium-small screens
         setDimensions({
-          width: 350,
-          height: 250
+          width: 450,
+          height: 320
         });
       } else {
         // Very small screens
@@ -50,22 +49,20 @@ export function ScratchToRevealDemo() {
   }, []);
 
   return (
-    <div className="w-full flex justify-center px-2">
-    <ScratchToReveal
-      width={dimensions.width}
-      height={dimensions.height}
-      minScratchPercentage={70}
-      className="flex items-center justify-center overflow-hidden rounded-2xl border-2 bg-gray-100"
-      gradientColors={["#A97CF8", "#F38CB8", "#FDCC92"]}
-    >
-      <Image
-        src={'/images/contents/certificate.png'}
-        alt="certificate"
-        height={"600"}
-        width="600"
-        className="h-auto w-full object-cover rounded-xl group-hover/card:shadow-xl"
-      />
-    </ScratchToReveal>
+    <div className="flex items-center justify-center p-4">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img
+          src="/images/contents/certificate.png"
+          alt="Beautiful landscape"
+          width={dimensions.width}
+          height={dimensions.height}
+          className="object-cover"
+          style={{
+            width: dimensions.width,
+            height: dimensions.height
+          }}
+        />
+      </div>
     </div>
   );
 }
@@ -87,24 +84,14 @@ export default function Certificate() {
         },
     ];
     return (
-        <div className="flex flex-col items-center justify-center bg-blue-50">
-            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo font-bold mt-20 text-xl md:text-2xl ">Surprise For You</RainbowButton>
-            <div>
-                <TypewriterEffectSmooth words={words} className="text-md md:text-md lg:text-md xl:text-md"/>
-            </div>
-            <div className="mb-10">
-                <ScratchToRevealDemo/>
-            </div>
-            <div>
-                <div className="bg-orange-600 px-3 py-2 text-white font-baloo font-bold text-xl md:text-2xl rounded-md mb-5">RECOMMENDED AGE</div>
-            </div>
-            <div className="flex flex-row font-baloo text-xl md:text-2xl font-bold mb-5">FOR CHILDREN AGED <div className="text-[#00c2cb] font-baloo text-xl md:text-2xl font-bold pl-2">1 TO 10 YEARS</div></div>
-            <div className="flex justify-center item-center mb-5 ml-10 mr-10 max-w-2xl">
-                <div className="font-baloo text-base md:text-xl font-semibold text-center">Kinovo is recommended for children aged 1 to 10. Therefore, if your child falls within this age range, you can purchase with confidence, as you will find activities suitable for all ages between 1 and 10.</div>
+        <div className="flex flex-col items-center justify-center">
+            <RainbowButton variant={"outline"} className="rounded-full text-[#13C0FA] font-baloo font-bold text-xl mt-6 md:text-2xl ">+ Personalized Certificate</RainbowButton>
+            <div className="mb-6 md:mb-10 mt-6 md:mt-10">
+                <ResponsiveImageDemo/>
             </div>
             <div className="justify-center">
                 <Button
-                    className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo py-8 mt-5 mb-5 px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200 md:mt-10 mb-10"
+                    className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo mt-4 mb-5 py-6 md:py-8 px-12 md:px-16 text-3xl md:text-4xl md:py-12 md:px-24 font-bold  rounded-full transition-colors duration-200 md:mt-10 mb-10"
                     onClick={() => router.push('#pricing')}
                 >
                     I Want Kinovo
@@ -113,4 +100,7 @@ export default function Certificate() {
         </div> 
     )
 }
+
+
+
 
