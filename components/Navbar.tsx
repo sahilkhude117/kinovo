@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 w-full backdrop-blur-lg h-[100px] md:h-[125px] transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full backdrop-blur-lg h-[60px] md:h-[125px] transition-all duration-300 ${
         scrolled ? "bg-background/80 shadow-md py-2 md:py-6" : "bg-white py-2 md:py-6"
       } ${visible ? "translate-y-0": "-translate-y-full"}`}
     >
@@ -99,13 +99,13 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex items-center justify-center p-3 rounded-md font-extrabold text-black focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-md font-extrabold text-black focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? (
-                <X size={40} strokeWidth={3} />
+                <X size={30} strokeWidth={3} />
               ) : (
-                <Menu size={40} strokeWidth={3} />
+                <Menu size={30} strokeWidth={3} />
               )}
             </button>
           </div>
