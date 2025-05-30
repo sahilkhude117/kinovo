@@ -23,21 +23,47 @@ export const POST = async (req: Request) => {
     const sign = `${razorpayOrderId}|${razorpayPaymentId}`;
     const expectedSignature = crypto.createHmac('sha256', secret).update(sign).digest('hex');
 
+    const purchase = await prisma.purchase.findUnique({
+      where: { razorpayOrderId },
+      include: { product: true }
+    })
+
+    if (!purchase) {
+      return NextResponse.json(
+        { error: "Purchase record not found "},
+        { status: 404 },
+      );
+    }
+
     // Verify signature
     if (razorpaySignature === expectedSignature) {
       try {
-        // Update database
-        // await prisma.purchase.update({
-        //   where: { orderId: razorpayOrderId },
-        //   data: {
-        //     status: 'COMPLETED',
-        //     paymentId: razorpayPaymentId,
-        //     purchasedAt: new Date(),
-        //   },
-        // });
+        
+        const updatedPurchase = await prisma.purchase.update({
+          where: { razorpayOrderId },
+          data: {
+            paymentStatus: 'COMPLETED',
+            razorpayPaymentId,
+          },
+        });
+
+        await prisma.productAnalytics.upsert({
+          where: {
+            productId: purchase.productId,
+          },
+          update: {
+            purchases: {
+              increment: 1
+            }
+          }, 
+          create: {
+            productId: purchase.productId,
+            purchases: 1,
+          }
+        })
 
         return NextResponse.json(
-          { success: true, message: 'Payment verified' },
+          { success: true, message: 'Payment verified', purchaseId: purchase.id },
           { status: 200 }
         );
       } catch (dbError) {
@@ -49,14 +75,13 @@ export const POST = async (req: Request) => {
       }
     } else {
       // Update database for failed payment
-    //   await prisma.purchase.update({
-    //     where: { orderId: razorpayOrderId },
-    //     data: {
-    //       status: 'FAILED',
-    //       paymentId: razorpayPaymentId,
-    //       purchasedAt: new Date(),
-    //     },
-    //   });
+      await prisma.purchase.update({
+        where: { razorpayOrderId },
+        data: {
+          paymentStatus: 'FAILED',
+          razorpayPaymentId
+        }
+      })
 
       return NextResponse.json(
         { success: false, message: 'Payment verification failed' },
