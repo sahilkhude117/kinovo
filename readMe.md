@@ -1,4 +1,6 @@
 TODOs
+ - ai powered
+ - how it works
  - payment/success
  - payment/failed
  - login

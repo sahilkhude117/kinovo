@@ -71,22 +71,27 @@ export default function Footer() {
             <h3 className="text-lg font-semibold text-[#1a3a3a] mb-4 font-baloo">Company</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="#about" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/policies/about" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/policies/privacy" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/policies/refund" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/policies/terms" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   Terms & Services
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/policies/contact" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   Contact Us
                 </Link>
               </li>

@@ -1,5 +1,4 @@
 import prisma from "@/lib/db";
-import { Phone } from "lucide-react";
 import { NextResponse } from "next/server";
 import Razorpay from "razorpay";
 
