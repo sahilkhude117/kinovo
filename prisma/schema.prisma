@@ -1,0 +1,102 @@
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id              String  @id @default(uuid())
+  name            String
+  description     String
+  slug            String  @unique
+  originalPrice   Float
+  discount        Int
+  thumbnail       String?
+  fileUrl         String
+  category        String
+  createdAt       DateTime @default(now())
+
+  purchases       Purchase[]
+  analytics       ProductAnalytics[]
+}
+
+model User {
+  id              String   @id @default(uuid())
+  name            String   
+  email           String   @unique
+  whatsappNumber  String
+  password        String   // Auto Generated
+  createdAt       DateTime @default(now())
+
+  purchases       Purchase[]
+  sessions        UserSession[]
+  analytics       UserAnalytics[]
+}
+
+model Purchase {
+  id              String  @id @default(uuid())
+  userId          String?
+  productId       String
+  email           String  @unique
+  name            String
+  whatappNumber   String
+  howHeardAboutUs String?
+  amount          Float
+  currency        String  @default("INR")
+  razorpayOrderId String  @unique
+  razorpayPaymentId String?
+  paymentStatus   PaymentStatus  @default(PENDING)
+  createdAt       DateTime @default(now())
+
+  user            User?    @relation(fields: [userId], references: [id])
+  product         Product  @relation(fields: [productId], references: [id])
+}
+
+model UserSession {
+  id              String  @id @default(uuid())
+  userId          String
+  token           String  @unique
+  expiresAt       DateTime
+  createdAt       DateTime @default(now())
+
+  user            User    @relation(fields: [userId], references: [id])
+}
+
+model UserAnalytics {
+  id              String    @id @default(uuid())
+  userId          String?
+  sessionId       String
+  event           String
+  page            String?
+  productId       String?
+  source       String?  // Traffic source
+  utmCampaign  String?
+  utmMedium    String?
+  utmSource    String?
+  metadata     Json?    // Additional event data
+  timestamp    DateTime @default(now())
+
+  user         User?    @relation(fields: [userId], references: [id])
+}
+
+model ProductAnalytics {
+  id           String   @id @default(uuid())
+  productId    String   @unique
+  views        Int      @default(0)
+  purchases    Int      @default(0)
+  date         DateTime @default(now())
+
+  product      Product  @relation(fields: [productId], references: [id])
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}

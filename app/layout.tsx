@@ -1,14 +1,38 @@
 import type React from "react"
 import "@/styles/globals.css"
-import { Inter } from "next/font/google"
+import { Baloo_2 } from "next/font/google"
+import localFont from 'next/font/local'
 import type { Metadata } from "next"
-import { ThemeProvider } from "@/components/theme-provider"
+import './globals.css'
+import KommunicateChat from "@/components/KommunicateChat"
 
-const inter = Inter({ subsets: ["latin"] })
+
+const baloo = Baloo_2({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-baloo',
+  weight: ['400','500','600','700','800']
+});
+
+const antiqueOlive = localFont({
+  src: [
+    {
+      path: '../public/fonts/Antique Olive Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Antique Olive Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    }
+  ],
+  variable: "--font-antique-olive"
+});
 
 export const metadata: Metadata = {
-  title: "kinovo",
-  description: "Printable worksheets for kids",
+  title: "Kinovo",
+  description: "Learning Made Simple",
 }
 
 export default function RootLayout({
@@ -18,10 +42,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body className={`${baloo.variable} ${antiqueOlive.variable}`}>
           {children}
-        </ThemeProvider>
+          <KommunicateChat/>
       </body>
     </html>
   )
@@ -29,4 +52,4 @@ export default function RootLayout({
 
 
 
-import './globals.css'
+
