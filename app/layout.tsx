@@ -5,7 +5,7 @@ import localFont from 'next/font/local'
 import type { Metadata } from "next"
 import './globals.css'
 import KommunicateChat from "@/components/KommunicateChat"
-
+import { Analytics } from "@vercel/analytics/next"
 
 const baloo = Baloo_2({
   subsets: ['latin'],
