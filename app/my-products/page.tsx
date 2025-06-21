@@ -1,13 +1,12 @@
 // app/my-products/page.tsx
 'use client';
 import { useState, useEffect } from 'react';
-import { useSession, signIn } from 'next-auth/react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Download, Calendar, Mail, Package, LogIn, ExternalLink, ShoppingBag } from 'lucide-react';
+import { Download, Calendar, Mail, Package, ExternalLink, ShoppingBag, Search } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 interface UserProduct {
@@ -31,34 +30,36 @@ interface UserProductsResponse {
 }
 
 export default function MyProductsPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const [email, setEmail] = useState('');
   const [products, setProducts] = useState<UserProduct[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [hasLoaded, setHasLoaded] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      // Redirect to login if not authenticated
-      router.push('/api/auth/signin');
-      return;
-    }
-    
-    if (status === 'authenticated' && session?.user?.email) {
-      fetchUserProducts();
-    }
-  }, [status, session, router]);
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const fetchUserProducts = async () => {
-    if (!session?.user?.email) return;
+    if (!email.trim()) {
+      setEmailError('Please enter your email address');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError('Please enter a valid email address');
+      return;
+    }
 
     setLoading(true);
     setError('');
+    setEmailError('');
     
     try {
       const response = await axios.post('/api/user/products', {
-        email: session.user.email
+        email: email.trim()
       });
 
       const data: UserProductsResponse = response.data;
@@ -78,8 +79,13 @@ export default function MyProductsPage() {
       console.error('Error:', err);
     } finally {
       setLoading(false);
-      setHasLoaded(true);
+      setHasSearched(true);
     }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    fetchUserProducts();
   };
 
   const handleDownload = async (downloadLink: string, productName: string) => {
@@ -113,19 +119,6 @@ export default function MyProductsPage() {
     });
   };
 
-  // Loading state
-  if (status === 'loading') {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  // Authenticated user content
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-4xl mx-auto pt-8">
@@ -134,11 +127,45 @@ export default function MyProductsPage() {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             My Products
           </h1>
-          <p className="text-lg text-gray-600 flex items-center justify-center gap-2">
-            <Mail className="w-5 h-5" />
-            {session?.user?.email}
+          <p className="text-lg text-gray-600">
+            Enter your email to view your purchased products
           </p>
         </div>
+
+        {/* Email Input Form */}
+        <Card className="mb-8 shadow-lg">
+          <CardContent className="p-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <div className="flex gap-3">
+                  <div className="flex-1">
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        setEmailError('');
+                      }}
+                      className={emailError ? 'border-red-500' : ''}
+                    />
+                    {emailError && (
+                      <p className="text-red-500 text-sm mt-1">{emailError}</p>
+                    )}
+                  </div>
+                  <Button type="submit" disabled={loading} className="flex items-center gap-2">
+                    <Search className="w-4 h-4" />
+                    {loading ? 'Searching...' : 'Find Products'}
+                  </Button>
+                </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
 
         {/* Loading State */}
         {loading && (
@@ -157,8 +184,18 @@ export default function MyProductsPage() {
           </Alert>
         )}
 
+        {/* Current Email Display */}
+        {hasSearched && email && !loading && (
+          <div className="mb-6 text-center">
+            <p className="text-lg text-gray-600 flex items-center justify-center gap-2">
+              <Mail className="w-5 h-5" />
+              Showing products for: {email}
+            </p>
+          </div>
+        )}
+
         {/* Products List */}
-        {hasLoaded && products.length > 0 && (
+        {hasSearched && products.length > 0 && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold text-gray-900">
@@ -243,15 +280,16 @@ export default function MyProductsPage() {
         )}
 
         {/* No Products State */}
-        {hasLoaded && products.length === 0 && !loading && !error && (
+        {hasSearched && products.length === 0 && !loading && !error && (
           <Card className="text-center py-12 shadow-lg">
             <CardContent>
               <ShoppingBag className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                No Products Yet
+                No Products Found
               </h3>
               <p className="text-gray-600 mb-6">
-                You haven't purchased any Kinovo worksheets yet. Start your learning journey today!
+                We couldn't find any Kinovo worksheets purchased with this email address. 
+                Make sure you're using the same email you used for your purchase.
               </p>
               <div className="space-y-4">
                 <Button asChild size="lg" className="bg-[#FFD700] hover:bg-[#FFB700] text-[#2A5C8F]">
@@ -278,6 +316,7 @@ export default function MyProductsPage() {
               Need Help?
             </h3>
             <div className="text-blue-800 space-y-2">
+              <p>• Use the same email address you used when making your purchase</p>
               <p>• Downloads are available immediately after successful payment</p>
               <p>• All purchases are linked to your account email</p>
               <p>• You can re-download your products anytime</p>
