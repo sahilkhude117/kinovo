@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String?
+  lastName  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  transactions Transaction[]
+
+  @@map("users")
+}
+
+model Product {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  name          String
+  description   String
+  originalPrice Float
+  price         Float
+  discount      Float   @default(0)
+  isActive      Boolean @default(true)
+  downloadUrl   String? // URL to the digital product file
+  thumbnailUrl  String?
+  category      String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  transactions Transaction[]
+
+  @@map("products")
+}
+
+model Transaction {
+  id            String  @id @default(cuid())
+  email         String
+  firstName     String
+  lastName      String?
+  howDidYouHear String
+
+  // Order details
+  amount   Float
+  currency String            @default("INR")
+  status   TransactionStatus @default(PENDING)
+
+  // Razorpay details
+  razorpayOrderId   String? @unique
+  razorpayPaymentId String? @unique
+  razorpaySignature String?
+
+  // Product details
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+
+  // User relation (optional - if user has account)
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  completedAt DateTime?
+
+  @@map("transactions")
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+model NewsletterSubscription {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("newsletter_subscriptions")
+}
