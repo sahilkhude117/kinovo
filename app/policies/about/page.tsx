@@ -16,18 +16,23 @@ const AboutUs = () => {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <h2 className="text-2xl font-semibold mb-4" style={{ fontFamily: 'Baloo, sans-serif' }}>Our Story</h2>
             <p className="text-gray-700 leading-relaxed mb-4">
-              Founded in 2023, Kinovo was born from a simple belief: every child deserves access to engaging, high-quality educational materials 
+              Kinovo was born from a simple belief: every child deserves access to engaging, high-quality educational materials 
               that make learning fun and effective. We recognized that parents and educators needed convenient, affordable access to professionally 
               designed worksheets and activities that could supplement traditional learning methods.
             </p>
-            <p className="text-gray-700 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed mb-4">
               Our team of experienced educators, child development specialists, and designers work together to create content that not only 
               educates but also inspires creativity and critical thinking in young minds. Each worksheet and activity bundle is carefully 
               crafted to align with developmental milestones and educational standards.
             </p>
+            <p className="text-gray-700 leading-relaxed">
+              Kinovo is run by Vishvjit Ghorpade, who is passionate about making quality educational resources accessible to families and 
+              educators worldwide. With a commitment to innovation and excellence, we continue to expand our collection of engaging learning materials 
+              that help children develop essential skills while having fun.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#FBB406' }}>
                 <Target className="w-6 h-6 text-white" />
@@ -50,7 +55,7 @@ const AboutUs = () => {
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+            {/* <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: '#FBB406' }}>
                 <Award className="w-6 h-6 text-white" />
               </div>
@@ -59,7 +64,7 @@ const AboutUs = () => {
                 Over 50,000 families and 1,000 educators have trusted Kinovo to enhance their children's learning journey. 
                 We're proud to be part of countless success stories.
               </p>
-            </div>
+            </div> */}
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
@@ -99,20 +104,10 @@ const AboutUs = () => {
               </div>
             </div>
           </div>
-
-          <div className="bg-gradient-to-r from-yellow-50 to-blue-50 p-6 rounded-lg">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3" style={{ fontFamily: 'Baloo, sans-serif' }}>Company Information</h3>
-              <div className="text-sm text-gray-600 space-y-1">
-                <p><strong>Legal Name:</strong> Kinovo Education Private Limited</p>
-                <p><strong>Founded:</strong> 2023</p>
-              </div>
-            </div>
-          </div>
         </div>
       </main>
     </div>
   );
 };
 
-export default AboutUs;
+export default AboutUs
