@@ -85,12 +85,12 @@ export default function Navbar() {
                 />
               </div>
             ))}
-            <Button
+            {/* <Button
               className="bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo text-2xl font-bold py-6 px-12 rounded-full transition-colors duration-200"
               onClick={() => window.location.href = "/signup"}
             >
               JOIN
-            </Button>
+            </Button> */}
           </nav>
 
           {/* Mobile menu button */}
@@ -131,12 +131,12 @@ export default function Navbar() {
                 </Link>
               </div>
             ))}
-            <Button
+            {/* <Button
               className="w-full bg-[#FBB406] hover:bg-[#13C0FA] text-white font-baloo text-xl font-bold py-3 px-12 rounded-full transition-colors duration-200 mt-4"
               onClick={() => window.location.href = "/signup"}
             >
               JOIN
-            </Button>
+            </Button> */}
           </div>
         </div>
       )}
