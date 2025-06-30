@@ -105,7 +105,7 @@ const FAQSection = () => {
           <p className="font-antique text-sm md:text-base text-gray-600 mb-4">
             Still have questions? We're here to help!
           </p>
-          <button className="font-baloo text-[#13C0FA] hover:text-[#0fabde] flex items-center justify-center mx-auto">
+          <button onClick={() => router.push('/policies/contact')} className="font-baloo text-[#13C0FA] hover:text-[#0fabde] flex items-center justify-center mx-auto">
             <span>Contact Support</span>
             <ChevronDown size={16} className="ml-1" />
           </button>

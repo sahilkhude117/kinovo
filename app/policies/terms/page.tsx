@@ -217,8 +217,8 @@ export default function TermsConditions() {
               </p>
               <div className="space-y-2 text-gray-700">
                 <p><strong>Email:</strong> support@kinovo.app</p>
-                <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
-                <p><strong>Address:</strong> [Your Business Address]</p>
+                <p><strong>Address:</strong> 46 B SAMPADA SOCIETY TELLI GALLI
+                                            ANDHERI EAST. Pin-400069</p>
               </div>
             </div>
           </section>

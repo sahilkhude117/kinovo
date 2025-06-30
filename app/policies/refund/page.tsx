@@ -130,7 +130,6 @@ const RefundPolicyPage: React.FC = () => {
       content: [
         "For refund requests or questions about this policy, please contact us:",
         "• Email: " + contactEmail,
-        "• Phone: " + contactPhone,
         "• Business Hours: Monday to Friday, 9:00 AM to 6:00 PM (EST)",
         "• Response Time: Within 24 hours for email inquiries",
         "Please include your order number and transaction details in all communications."
@@ -310,21 +309,6 @@ const RefundPolicyPage: React.FC = () => {
             </div>
           </div>
         </main>
-
-        {/* Footer */}
-        <footer className="bg-gray-800 text-white py-8 mt-16">
-          <div className="container mx-auto px-6 text-center">
-            <p className="text-gray-300">
-              © 2025 {companyName}. All rights reserved. | 
-              <Link href="/privacy-policy" className="text-[#13C0FA] hover:text-[#FBB406] ml-2">
-                Privacy Policy
-              </Link> | 
-              <Link href="/terms-of-service" className="text-[#13C0FA] hover:text-[#FBB406] ml-2">
-                Terms of Service
-              </Link>
-            </p>
-          </div>
-        </footer>
       </div>
 
       <style jsx global>{`

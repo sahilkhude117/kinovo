@@ -104,7 +104,7 @@ const TestimonialsSection: React.FC = () => {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section className="py-8 md:py-8 px-2 md:px-6">
+    <section id='testimonials' className="py-8 md:py-8 px-2 md:px-6">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div 

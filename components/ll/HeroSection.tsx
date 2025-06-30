@@ -38,9 +38,9 @@ const HeroSection = () => {
               <p className="text-xs md:text-xl text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto">
                 Thousands of premium printable worksheets that make childhood education fun, engaging, and effortlessly organized.
               </p>
-              <div className="flex justify-center items-center mb-6 md:mb-12">
+              {/* <div className="flex justify-center items-center mb-6 md:mb-12">
                 <HeroVideo/>
-              </div>
+              </div> */}
               <div className="flex justify-center items-center mb-6 md:mb-12">
                 <AvatarCloud/>
               </div>

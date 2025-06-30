@@ -49,17 +49,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#product" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
-                  Products
-                </Link>
-              </li>
-              <li>
-                <Link href="#testimonials" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/#testimonials" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   Testimonials
                 </Link>
               </li>
               <li>
-                <Link href="#faq" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
+                <Link href="/#faq" className="text-gray-600 hover:text-[#00c2cb] font-antiqueolive">
                   FAQ'S
                 </Link>
               </li>
