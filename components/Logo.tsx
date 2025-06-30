@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Logo(){
     return (
         <div className="flex-shrink-0">
-            <Link href="/ll" className="flex items-center">
+            <Link href="/" className="flex items-center">
               <Image 
                 src="/logos/logo.svg" 
                 alt="Beast Philanthropy Logo"
