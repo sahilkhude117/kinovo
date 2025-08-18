@@ -26,7 +26,7 @@ const AboutUs = () => {
               crafted to align with developmental milestones and educational standards.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              Kinovo is run by Vishvjit Ghorpade, who is passionate about making quality educational resources accessible to families and 
+              Kinovo is run by Sahil Khude, who is passionate about making quality educational resources accessible to families and 
               educators worldwide. With a commitment to innovation and excellence, we continue to expand our collection of engaging learning materials 
               that help children develop essential skills while having fun.
             </p>

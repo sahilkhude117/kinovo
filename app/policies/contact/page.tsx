@@ -198,10 +198,16 @@ export default function ContactUs() {
                   </div>
                     <div>
                       <h4 className="font-semibold text-gray-800">Address</h4>
-                      <p className="text-gray-600">
+                      {/* <p className="text-gray-600">
                         46 B SAMPADA SOCIETY TELLI GALLI 
                         <br />ANDHERI EAST.
                         Pin-400069
+                      </p> */}
+                      <p className="text-gray-600">
+                        AT - Shedri Tal - Gadhinglaj
+                        <br />SHENDRI.
+                        Kolhapur, Maharastra.
+                        Pin -  416502
                       </p>
                     </div>
                 </div>
